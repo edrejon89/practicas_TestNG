@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CustomerPulse">
+
+    <test name="Test1">
+        <!-- <parameter name="browser" value="firefox"> </parameter>
+-->
+        <classes>
+            <class name="LoginTest"></class>
+        </classes>
+
+    </test>
+
+
+</suite>
