@@ -21,9 +21,11 @@ public class RegistroUsuario {
     String baseURL;
     Locale locale = new Locale("es","us");
     Faker faker = new Faker(locale);
+
     @BeforeClass
     @Parameters({"browser"})
     public void  setUp(String browser){
+
         if (browser.equalsIgnoreCase("firefox")) {
            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
@@ -47,7 +49,7 @@ public class RegistroUsuario {
         }
     }
 
-    @Test
+    @Test(priority = 1)
     public void registroUsuario(){
         WebElement btnRegister = driver.findElement(By.xpath("//a[contains(@href,'http://qa.walook.com.mx:81/usuario')]"));
         btnRegister.click();
@@ -71,7 +73,8 @@ public class RegistroUsuario {
         WebElement btnRegistro = driver.findElement(By.id("btnRegistrarse"));
         btnRegistro.click();
     }
-    @Test
+
+    @Test(priority = 0)
     public void registroUsuarioCancelar(){
         WebElement btnRegister = driver.findElement(By.xpath("//a[contains(@href,'http://qa.walook.com.mx:81/usuario')]"));
         btnRegister.click();
