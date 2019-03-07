@@ -16,41 +16,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class RegistroUsuario {
-    WebDriver driver;
-    String baseURL;
+public class RegistroUsuario extends BaseTest{
     Locale locale = new Locale("es","us");
     Faker faker = new Faker(locale);
 
-    @BeforeClass
-    @Parameters({"browser"})
-    public void  setUp(String browser){
-
-        if (browser.equalsIgnoreCase("firefox")) {
-           WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
-        } else if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        }
-        baseURL = "http://qa.walook.com.mx:81/login";
 
 
-       // driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        driver.get(baseURL);
-
-
-    }
-    @AfterClass
-    public void cleanUp(){
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
-    @Test(priority = 1)
-    public void registroUsuario(){
+    @Test(priority = 1, dataProvider = "register",dataProviderClass = DataGenerator.class)
+    public void registroUsuario(String user,String pass){
         WebElement btnRegister = driver.findElement(By.xpath("//a[contains(@href,'http://qa.walook.com.mx:81/usuario')]"));
         btnRegister.click();
         driver.findElement(By.id("nombres")).sendKeys("Alberto");
